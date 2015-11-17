@@ -30,6 +30,7 @@ module.exports = function(grunt) {
             }
         },
         clean: {
+            src: ['src/lib'],
             dist: ['dist']
         },
         copy: {
@@ -39,6 +40,25 @@ module.exports = function(grunt) {
                     cwd: 'src/images',
                     src: ['**'],
                     dest: 'dist/images/'
+                }, {
+                    expand: true,
+                    cwd: 'src/lib',
+                    src: [
+                        '*/*.min.js',
+                        '*/*.min.css',
+                        '*/dist/*.min.js',
+                        '*/dist/*.min.css',
+                        'firebase/firebase.js'
+                    ],
+                    dest: 'dist/lib/'
+                }]
+            }
+        },
+        rename: {
+            dist: {
+                files: [{
+                    src: ['dist/lib/firebase/firebase.js'],
+                    dest: 'dist/lib/firebase/firebase.min.js'
                 }]
             }
         },
@@ -50,11 +70,33 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'src/',
+                    cwd: 'dist/',
                     src: ['index.html'],
                     dest: 'dist/',
                     ext: '.html',
                     extDot: 'first'
+                }]
+            }
+        },
+        bower: {
+            dist: {
+                options: {
+                    copy: false
+                }
+            }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [{
+                        match: /['"]lib\/(.*(?!(\.min|-debug)))\.(js|css)['"]/g,
+                        replacement: '"lib/$1.min.$2' +
+                                     '?_=<%= new Date().getTime() %>"'
+                    }]
+                },
+                files: [{
+                    src: ['src/index.html'],
+                    dest: 'dist/index.html'
                 }]
             }
         }
@@ -66,10 +108,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-rename');
     
     // Custom tasks
     grunt.registerTask('lint', ['jshint', 'jscs']);
-    grunt.registerTask('build', ['clean', 'copy', 'htmlmin']);
+    grunt.registerTask('build', [
+        'clean', 'bower', 'copy', 'rename', 'replace'
+    ]);
     
     // Default task.
     grunt.registerTask('default', ['lint', 'build']);
