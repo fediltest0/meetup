@@ -31,8 +31,17 @@
             'firebase'
         ])
         .constant(
-            'baseFirebaseUrl', 'https://shining-heat-601.firebaseio.com/'
+            'baseFirebaseUrl',
+            'https://shining-heat-601.firebaseio.com/'
         )
-        .config(['$routeProvider', '$mdThemingProvider', config]);
+        .constant(
+            'noPhotoUrl',
+            'http://photos4.meetupstatic.com/img/noPhoto_50.png'
+        )
+        .config([
+            '$routeProvider',
+            '$mdThemingProvider',
+            config
+        ]);
 
 }());

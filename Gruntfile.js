@@ -14,11 +14,7 @@ module.exports = function(grunt) {
             },
             src: {
                 options: {
-                    browser: true,
-                    maxcomplexity: 5,
-                    globals: {
-                        angular: true
-                    }
+                    jshintrc: true
                 },
                 files: {
                     src: ['src/js/**/*.js']
@@ -152,7 +148,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['jshint', 'jscs']);
     grunt.registerTask('build', [
         'clean:dist', 'bower', 'copy', 'rename', 'replace', 'processhtml',
-        'uglify', 'cssmin'//, 'htmlmin'
+        'uglify', 'cssmin', 'htmlmin'
     ]);
     
     // Default task.

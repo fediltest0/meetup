@@ -1,0 +1,23 @@
+{
+  "browser": true,
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "freeze": true,
+  "globals": {
+    "angular": true,
+    "Firebase": true
+  },
+  "latedef": true,
+  "maxcomplexity": 5,
+  "maxdepth": 5,
+  "maxstatements": 20,
+  "nocomma": true,
+  "nonbsp": true,
+  "nonew": true,
+  "singleGroups": true,
+  "strict": true,
+  "undef": true,
+  "unused": true
+}
