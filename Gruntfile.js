@@ -14,16 +14,20 @@ module.exports = function(grunt) {
             },
             src: {
                 options: {
-                    browser: true
+                    browser: true,
+                    maxcomplexity: 5,
+                    globals: {
+                        angular: true
+                    }
                 },
                 files: {
-                    src: ['src/**.js']
+                    src: ['src/js/**/*.js']
                 }
             }
         },
         jscs: {
             build: 'Gruntfile.js',
-            src: 'src/**.js',
+            src: 'src/js/**/*.js',
             options: {
                 config: '.jscsrc',
                 verbose: true
@@ -36,6 +40,11 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: [{
+                    expand: true,
+                    cwd: 'src',
+                    src: ['index.html'],
+                    dest: 'dist/'
+                }, {
                     expand: true,
                     cwd: 'src/images',
                     src: ['**'],
@@ -95,14 +104,38 @@ module.exports = function(grunt) {
                     }]
                 },
                 files: [{
-                    src: ['src/index.html'],
+                    src: ['dist/index.html'],
                     dest: 'dist/index.html'
                 }]
+            }
+        },
+        uglify: {
+            dist: {
+                files: {
+                    'dist/js/app.min.js': [
+                        'src/js/app.js',
+                        'src/js/**/*.js'
+                    ]
+                }
+            }
+        },
+        processhtml: {
+            dist: {
+                files: {
+                    'dist/index.html': ['src/index.html']
+                }
+            }
+        },
+        cssmin: {
+            dist: {
+                files: {
+                    'dist/css/style.min.css': ['src/css/**/*.css']
+                }
             }
         }
     });
     
-    // Load the plugin that provides the "uglify" task.
+    // Load the plugins
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -111,11 +144,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-rename');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-processhtml');
     
     // Custom tasks
     grunt.registerTask('lint', ['jshint', 'jscs']);
     grunt.registerTask('build', [
-        'clean', 'bower', 'copy', 'rename', 'replace'
+        'clean:dist', 'bower', 'copy', 'rename', 'replace', 'processhtml',
+        'uglify', 'cssmin'//, 'htmlmin'
     ]);
     
     // Default task.
