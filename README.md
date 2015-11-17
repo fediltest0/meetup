@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/fediltest0/meetup.svg?branch=master)](https://travis-ci.org/fediltest0/meetup)
