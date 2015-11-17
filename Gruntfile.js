@@ -11,12 +11,21 @@ module.exports = function(grunt) {
                 files: {
                     src: ['Gruntfile.js']
                 }
+            },
+            src: {
+                options: {
+                    browser: true
+                },
+                files: {
+                    src: ['src/**.js']
+                }
             }
         },
         jscs: {
-            src: "**.js",
+            build: 'Gruntfile.js',
+            src: 'src/**.js',
             options: {
-                config: ".jscsrc",
+                config: '.jscsrc',
                 verbose: true
             }
         }
