@@ -47,6 +47,11 @@ module.exports = function(grunt) {
                     dest: 'dist/images/'
                 }, {
                     expand: true,
+                    cwd: 'src/partials',
+                    src: ['**'],
+                    dest: 'dist/partials/'
+                }, {
+                    expand: true,
                     cwd: 'src/lib',
                     src: [
                         '*/*.min.js',
@@ -76,7 +81,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'dist/',
-                    src: ['index.html'],
+                    src: ['index.html', 'partials/*.html'],
                     dest: 'dist/',
                     ext: '.html',
                     extDot: 'first'
