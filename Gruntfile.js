@@ -40,7 +40,8 @@ module.exports = function(grunt) {
         },
         clean: {
             src: ['src/lib'],
-            dist: ['dist']
+            dist: ['dist'],
+            test: ['coverage']
         },
         copy: {
             dist: {
@@ -147,6 +148,15 @@ module.exports = function(grunt) {
             test: {
                 configFile: 'karma.conf.js'
             }
+        },
+        coveralls: {
+            options: {
+                debug: false,
+                coverageDir: 'coverage',
+                dryRun: !process.env.TRAVIS,
+                force: true,
+                recursive: true
+            }
         }
     });
     
@@ -163,6 +173,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-karma-coveralls');
     
     // Custom tasks
     grunt.registerTask('lint', ['jshint', 'jscs']);
@@ -170,7 +181,7 @@ module.exports = function(grunt) {
         'clean:dist', 'bower', 'copy', 'rename', 'replace', 'processhtml',
         'uglify', 'cssmin', 'htmlmin'
     ]);
-    grunt.registerTask('test', ['karma']);
+    grunt.registerTask('test', ['clean:test', 'karma', 'coveralls']);
     
     // Default task.
     grunt.registerTask('default', ['lint', 'build', 'test']);
