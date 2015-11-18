@@ -9,7 +9,7 @@ module.exports = function(grunt) {
                     node: true
                 },
                 files: {
-                    src: ['Gruntfile.js']
+                    src: ['Gruntfile.js', 'karma.conf.js']
                 }
             },
             src: {
@@ -19,11 +19,20 @@ module.exports = function(grunt) {
                 files: {
                     src: ['src/js/**/*.js']
                 }
+            },
+            test: {
+                options: {
+                    jshintrc: true
+                },
+                files: {
+                    src: ['test/js/**/*.js']
+                }
             }
         },
         jscs: {
-            build: 'Gruntfile.js',
+            build: ['Gruntfile.js', 'karma.conf.js'],
             src: 'src/js/**/*.js',
+            test: 'test/js/**/*.js',
             options: {
                 config: '.jscsrc',
                 verbose: true
@@ -133,6 +142,11 @@ module.exports = function(grunt) {
                     'dist/css/style.min.css': ['src/css/**/*.css']
                 }
             }
+        },
+        karma: {
+            test: {
+                configFile: 'karma.conf.js'
+            }
         }
     });
     
@@ -148,6 +162,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-karma');
     
     // Custom tasks
     grunt.registerTask('lint', ['jshint', 'jscs']);
@@ -155,8 +170,9 @@ module.exports = function(grunt) {
         'clean:dist', 'bower', 'copy', 'rename', 'replace', 'processhtml',
         'uglify', 'cssmin', 'htmlmin'
     ]);
+    grunt.registerTask('test', ['karma']);
     
     // Default task.
-    grunt.registerTask('default', ['lint', 'build']);
+    grunt.registerTask('default', ['lint', 'build', 'test']);
 
 };
