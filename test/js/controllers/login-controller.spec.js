@@ -4,7 +4,7 @@ describe('LoginController', function() {
         isAuthSuccessful,
         data;
     
-    beforeEach(function () {
+    beforeEach(function() {
         module('app', function($provide) {
             isAuthSuccessful = true;
             data = {};
@@ -12,13 +12,13 @@ describe('LoginController', function() {
                 $authWithOAuthPopup: function() {
                     var obj = {
                         then: function(callback) {
-                            if(isAuthSuccessful) {
+                            if (isAuthSuccessful) {
                                 callback(data);
                             }
                             return obj;
                         },
                         catch: function(callback) {
-                            if(!isAuthSuccessful) {
+                            if (!isAuthSuccessful) {
                                 callback(data);
                             }
                             return obj;
@@ -31,13 +31,13 @@ describe('LoginController', function() {
             $provide.factory('$firebaseAuth', function() {
                 return function() {
                     return auth;
-                }
+                };
             });
             // refService
             $provide.factory('refService', function() {
                 return {
                     getRef: function() {}
-                }
+                };
             });
         });
     });

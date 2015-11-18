@@ -10,7 +10,9 @@
 
         this.getRef = function getRef(collection) {
             if (!refCache[collection]) {
-                refCache[collection] = new $window.Firebase(url + '/' + collection);
+                refCache[collection] = new $window.Firebase(
+                    url + '/' + collection
+                );
             }
             return refCache[collection];
         };
