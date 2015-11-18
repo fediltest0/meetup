@@ -7,7 +7,7 @@
         this.withGoogle = function() {
             auth.$authWithOAuthPopup("google").then(function(authData) {
                 $log.debug('Authentication succeed: ', authData);
-                $location.path('/materials');
+                $location.path('/members');
             }).catch(function(error) {
                 $log.error("Authentication failed: ", error);
             });
@@ -16,7 +16,7 @@
         this.withGithub = function() {
             auth.$authWithOAuthPopup("github").then(function(authData) {
                 $log.debug('Authentication succeed: ', authData);
-                $location.path('/materials');
+                $location.path('/members');
             }).catch(function(error) {
                 $log.error("Authentication failed: ", error);
             });

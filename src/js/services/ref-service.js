@@ -1,16 +1,16 @@
 (function() {
     'use strict';
 
-    function RefService(url) {
+    function RefService($window, url) {
 
         var refCache = {
-            'root': new Firebase(url),
-            'results': new Firebase(url + '/results')
+            'root': new $window.Firebase(url),
+            'results': new $window.Firebase(url + '/results')
         };
 
         this.getRef = function getRef(collection) {
             if (!refCache[collection]) {
-                refCache[collection] = new Firebase(url + '/' + collection);
+                refCache[collection] = new $window.Firebase(url + '/' + collection);
             }
             return refCache[collection];
         };
@@ -19,6 +19,7 @@
     angular.
         module('app').
         service('refService', [
+            '$window',
             'baseFirebaseUrl',
             RefService
         ]);
