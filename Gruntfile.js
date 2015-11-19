@@ -17,7 +17,7 @@ module.exports = function(grunt) {
                     jshintrc: true
                 },
                 files: {
-                    src: ['src/js/**/*.js']
+                    src: ['src/app/js/**/*.js']
                 }
             },
             test: {
@@ -31,15 +31,15 @@ module.exports = function(grunt) {
         },
         jscs: {
             build: ['Gruntfile.js', 'karma.conf.js'],
-            src: 'src/js/**/*.js',
-            test: 'test/js/**/*.js',
+            src: 'src/app/js/**/*.js',
+            test: 'test/app/js/**/*.js',
             options: {
                 config: '.jscsrc',
                 verbose: true
             }
         },
         clean: {
-            src: ['src/lib'],
+            src: ['src/app/lib'],
             dist: ['dist'],
             test: ['coverage']
         },
@@ -47,22 +47,22 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'src',
+                    cwd: 'src/app',
                     src: ['index.html'],
-                    dest: 'dist/'
+                    dest: 'dist/app/'
                 }, {
                     expand: true,
-                    cwd: 'src/images',
+                    cwd: 'src/app/images',
                     src: ['**'],
-                    dest: 'dist/images/'
+                    dest: 'dist/app/images/'
                 }, {
                     expand: true,
-                    cwd: 'src/partials',
+                    cwd: 'src/app/partials',
                     src: ['**'],
-                    dest: 'dist/partials/'
+                    dest: 'dist/app/partials/'
                 }, {
                     expand: true,
-                    cwd: 'src/lib',
+                    cwd: 'src/app/lib',
                     src: [
                         '*/*.min.js',
                         '*/*.min.css',
@@ -70,15 +70,15 @@ module.exports = function(grunt) {
                         '*/dist/*.min.css',
                         'firebase/firebase.js'
                     ],
-                    dest: 'dist/lib/'
+                    dest: 'dist/app/lib/'
                 }]
             }
         },
         rename: {
             dist: {
                 files: [{
-                    src: ['dist/lib/firebase/firebase.js'],
-                    dest: 'dist/lib/firebase/firebase.min.js'
+                    src: ['dist/app/lib/firebase/firebase.js'],
+                    dest: 'dist/app/lib/firebase/firebase.min.js'
                 }]
             }
         },
@@ -90,9 +90,9 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'dist/',
+                    cwd: 'dist/app/',
                     src: ['index.html', 'partials/*.html'],
-                    dest: 'dist/',
+                    dest: 'dist/app/',
                     ext: '.html',
                     extDot: 'first'
                 }]
@@ -115,17 +115,17 @@ module.exports = function(grunt) {
                     }]
                 },
                 files: [{
-                    src: ['dist/index.html'],
-                    dest: 'dist/index.html'
+                    src: ['dist/app/index.html'],
+                    dest: 'dist/app/index.html'
                 }]
             }
         },
         uglify: {
             dist: {
                 files: {
-                    'dist/js/app.min.js': [
-                        'src/js/app.js',
-                        'src/js/**/*.js'
+                    'dist/app/js/app.min.js': [
+                        'src/app/js/app.js',
+                        'src/app/js/**/*.js'
                     ]
                 }
             }
@@ -133,14 +133,14 @@ module.exports = function(grunt) {
         processhtml: {
             dist: {
                 files: {
-                    'dist/index.html': ['src/index.html']
+                    'dist/app/index.html': ['src/app/index.html']
                 }
             }
         },
         cssmin: {
             dist: {
                 files: {
-                    'dist/css/style.min.css': ['src/css/**/*.css']
+                    'dist/app/css/style.min.css': ['src/app/css/**/*.css']
                 }
             }
         },
@@ -156,6 +156,23 @@ module.exports = function(grunt) {
                 dryRun: !process.env.TRAVIS,
                 force: true,
                 recursive: true
+            }
+        },
+        ngdocs: {
+            options: {
+                dest: 'dist/docs',
+                startPage: '/api',
+                title: '<%= pkg.name %>',
+                image: 'src/app/images/favicon.png',
+                imageLink: '<%= pkg.homepage %>'
+            },
+            tutorial: {
+                src: ['src/docs/tutorial/*.ngdoc'],
+                title: 'Tutorial'
+            },
+            api: {
+                src: ['src/app/js/**/*.js'],
+                title: 'API Documentation'
             }
         }
     });
@@ -174,6 +191,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-karma-coveralls');
+    grunt.loadNpmTasks('grunt-ngdocs');
     
     // Custom tasks
     grunt.registerTask('lint', ['jshint', 'jscs']);
@@ -182,8 +200,9 @@ module.exports = function(grunt) {
         'uglify', 'cssmin', 'htmlmin'
     ]);
     grunt.registerTask('test', ['clean:test', 'karma', 'coveralls']);
+    grunt.registerTask('docs', ['ngdocs']);
     
     // Default task.
-    grunt.registerTask('default', ['lint', 'build', 'test']);
+    grunt.registerTask('default', ['lint', 'build', 'test', 'docs']);
 
 };
