@@ -12,11 +12,11 @@ describe('MeetupService', function() {
                     getRef: function() {
                         return {
                             child: function() {
-                                return child
+                                return child;
                             }
-                        }
+                        };
                     }
-                }
+                };
             });
             $provide.factory('$firebaseArray', function() {
                 return function() {
@@ -34,15 +34,15 @@ describe('MeetupService', function() {
                                 then: function(callback) {
                                     callback();
                                 }
-                            }
+                            };
                         },
                         filter: function() {
                             return Array.prototype.filter.apply(
                                 this, arguments
                             );
                         }
-                    }
-                }
+                    };
+                };
             });
         });
     });
