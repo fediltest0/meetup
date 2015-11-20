@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            src: ['src/app/lib'],
+            src: ['src/lib'],
             dist: ['dist'],
             test: ['coverage']
         },
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
                     dest: 'dist/app/partials/'
                 }, {
                     expand: true,
-                    cwd: 'src/app/lib',
+                    cwd: 'src/lib',
                     src: [
                         '*/*.min.js',
                         '*/*.min.css',
@@ -70,15 +70,15 @@ module.exports = function(grunt) {
                         '*/dist/*.min.css',
                         'firebase/firebase.js'
                     ],
-                    dest: 'dist/app/lib/'
+                    dest: 'dist/lib/'
                 }]
             }
         },
         rename: {
             dist: {
                 files: [{
-                    src: ['dist/app/lib/firebase/firebase.js'],
-                    dest: 'dist/app/lib/firebase/firebase.min.js'
+                    src: ['dist/app/firebase/firebase.js'],
+                    dest: 'dist/app/firebase/firebase.min.js'
                 }]
             }
         },

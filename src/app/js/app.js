@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
     'use strict';
 
     function config($routeProvider, $mdThemingProvider) {
@@ -44,4 +44,4 @@
             config
         ]);
 
-}());
+}(window.angular));
