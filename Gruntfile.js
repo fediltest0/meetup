@@ -3,6 +3,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        bowerrc: grunt.file.readJSON('.bowerrc'),
         jshint: {
             build: {
                 options: {
@@ -39,7 +40,7 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            src: ['src/lib'],
+            src: ['src/app/lib'],
             dist: ['dist'],
             test: ['coverage']
         },
@@ -62,7 +63,7 @@ module.exports = function(grunt) {
                     dest: 'dist/app/partials/'
                 }, {
                     expand: true,
-                    cwd: 'src/lib',
+                    cwd: 'src/app/lib',
                     src: [
                         '*/*.min.js',
                         '*/*.min.css',
@@ -70,15 +71,15 @@ module.exports = function(grunt) {
                         '*/dist/*.min.css',
                         'firebase/firebase.js'
                     ],
-                    dest: 'dist/lib/'
+                    dest: 'dist/app/lib/'
                 }]
             }
         },
         rename: {
             dist: {
                 files: [{
-                    src: ['dist/app/firebase/firebase.js'],
-                    dest: 'dist/app/firebase/firebase.min.js'
+                    src: ['dist/app/lib/firebase/firebase.js'],
+                    dest: 'dist/app/lib/firebase/firebase.min.js'
                 }]
             }
         },
@@ -108,10 +109,24 @@ module.exports = function(grunt) {
         replace: {
             dist: {
                 options: {
+                    variables: {
+                        version: '<%= pkg.version %>'
+                    },
                     patterns: [{
-                        match: /['"]lib\/(.*(?!(\.min|-debug)))\.(js|css)['"]/g,
-                        replacement: '"lib/$1.min.$2' +
-                                     '?_=<%= new Date().getTime() %>"'
+                        match: /['"]lib\/([^\/]+)\/(.+)\.(js|css)['"]/g,
+                        replacement: function(match, lib, file, ext) {
+                            var bwr = grunt.file.readJSON(
+                                    grunt.config.process(
+                                        '<%= bowerrc.directory %>'
+                                    ) +
+                                    lib + '/bower.json'
+                                ),
+                                path = '"lib/' + lib + '/' +
+                                   file.replace(/\.min|-debug/, '') +
+                                   '.min.' + ext +
+                                   '?_=' + bwr.version + '"';
+                            return path;
+                        }
                     }]
                 },
                 files: [{
@@ -133,14 +148,17 @@ module.exports = function(grunt) {
         processhtml: {
             dist: {
                 files: {
-                    'dist/app/index.html': ['src/app/index.html']
+                    'dist/app/index.html': ['dist/app/index.html']
                 }
             }
         },
         cssmin: {
             dist: {
                 files: {
-                    'dist/app/css/style.min.css': ['src/app/css/**/*.css']
+                    'dist/app/css/style.min.css': ['src/app/css/**/*.css'],
+'dist/app/lib/angular-material-icons/angular-material-icons.min.css': [
+    'src/app/lib/angular-material-icons/angular-material-icons.css'
+]
                 }
             }
         },
@@ -199,7 +217,7 @@ module.exports = function(grunt) {
         'clean:dist', 'bower', 'copy', 'rename', 'replace', 'processhtml',
         'uglify', 'cssmin', 'htmlmin'
     ]);
-    grunt.registerTask('test', ['clean:test', 'karma', 'coveralls']);
+    grunt.registerTask('test:unit', ['clean:test', 'karma', 'coveralls']);
     grunt.registerTask('docs', ['ngdocs']);
     
     // Default task.
@@ -207,7 +225,7 @@ module.exports = function(grunt) {
         'clean:src',
         'lint',
         'build',
-        'test',
+        'test:unit',
         'docs'
     ]);
 
