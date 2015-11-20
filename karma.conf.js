@@ -39,7 +39,7 @@ module.exports = function(config) {
         // available preprocessors:
         // https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/js/**/*.js': ['coverage']
+            'src/app/js/**/*.js': ['coverage']
         },
 
 

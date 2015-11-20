@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     jshintrc: true
                 },
                 files: {
-                    src: ['test/js/**/*.js']
+                    src: ['test/app/js/**/*.js']
                 }
             }
         },
