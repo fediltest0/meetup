@@ -203,6 +203,12 @@ module.exports = function(grunt) {
     grunt.registerTask('docs', ['ngdocs']);
     
     // Default task.
-    grunt.registerTask('default', ['lint', 'build', 'test', 'docs']);
+    grunt.registerTask('default', [
+        'clean:src',
+        'lint',
+        'build',
+        'test',
+        'docs'
+    ]);
 
 };
