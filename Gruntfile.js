@@ -189,7 +189,7 @@ module.exports = function(grunt) {
                 title: 'Tutorial'
             },
             api: {
-                src: ['src/app/js/**/*.js'],
+                src: ['src/app/js/**/*.js', 'src/docs/api/**/*.ngdoc'],
                 title: 'API Documentation'
             }
         }
