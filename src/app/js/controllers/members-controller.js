@@ -34,7 +34,7 @@
          *
          * ```html
          * <md-sidenav md-component-id="menu">Sidebar</md-sidenav>
-         * 
+         *
          * <div ng-controller="MembersController as vm">
          *   <button ng-click="vm.toggleSidenav('menu')">Toggle sidebar</button>
          * </div>
