@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+    var tasks;
 
     // Load configuration.
     require('load-grunt-initconfig')(grunt);
@@ -10,15 +11,20 @@ module.exports = function(grunt) {
         'uglify', 'cssmin', 'htmlmin'
     ]);
     grunt.registerTask('test:unit', ['clean:test', 'karma', 'coveralls']);
+    grunt.registerTask('test:e2e', ['protractor']);
     grunt.registerTask('docs', ['ngdocs']);
     
     // Default task.
-    grunt.registerTask('default', [
+    tasks = [
         'clean:src',
         'lint',
         'compile',
         'test:unit',
         'docs'
-    ]);
+    ];
+    if (process.env.TRAVIS) {
+        tasks.push('test:e2e');
+    }
+    grunt.registerTask('default', tasks);
 
 };
