@@ -1,9 +1,8 @@
 describe('Protractor Demo App', function() {
 
     it('should have a title', function() {
-        browser.get('http://juliemr.github.io/protractor-demo/');
-
-        expect(browser.getTitle()).toEqual('Super Calculator');
+        browser.get('http://localhost:8282/app/index.html');
+        expect(browser.getTitle()).toEqual('Front-End.IL');
     });
 
     it('should add one and two', function() {

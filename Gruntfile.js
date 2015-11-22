@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         'uglify', 'cssmin', 'htmlmin'
     ]);
     grunt.registerTask('test:unit', ['clean:test', 'karma', 'coveralls']);
-    grunt.registerTask('test:e2e', ['protractor']);
+    grunt.registerTask('test:e2e', ['http-server', 'protractor']);
     grunt.registerTask('docs', ['ngdocs']);
     
     // Default task.
