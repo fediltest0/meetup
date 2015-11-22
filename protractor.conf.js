@@ -16,5 +16,5 @@ exports.config = {
         'build': process.env.TRAVIS_BUILD_NUMBER
     }],
     framework: 'jasmine',
-    specs: ['test/spec.js']
+    specs: ['test/app/e2e/spec.js']
 };
