@@ -1,0 +1,34 @@
+<a href="https://github.com/fediltest0/meetup/edit/master/src/app/js/services/ref-service.js" class="improve-docs"><i class="icon-edit"> </i>Improve this doc</a><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/services/ref-service.js#L25" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">refService</code>
+<div><span class="hint">service in module <code ng:non-bindable="">app</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="app-refservice-page"><p>The <code>refService</code> is used to initialise and cache <code>Firebase</code> reference
+objects.</p>
+<p>This is a low-level data access service that in most cases should not be
+used directly in controllers or directives. <code>refService</code> should be used
+by high-level services (like <a href="#/api/app.meetupService">app.meetupService</a>) that provide
+abstraction on data source and add application specific semantics.</p>
+<p>For more information about <code>Firebase</code> reference objects see <a href="https://www.firebase.com/docs/web/api/firebase/constructor.html">Firebase API reference</a></p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$window">$window</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/baseFirebaseUrl">baseFirebaseUrl</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/services/ref-service.js#L49" class="view-source icon-eye-open"> </a><h3 id="methods_getref">getRef(collection)</h3>
+<div class="getref"><div class="app-refservice-getref-page"><p>Returns cached reference object. In case reference object is
+requested for the first time, it will be created and put into cache.</p>
+<pre><code class="lang-js">refService.getRef(&#39;root&#39;);
+</code></pre>
+</div><h5 id="methods_getref_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>collection</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="app-refservice-getref-page"><p>name of <code>Firebase</code> collection</p>
+</div></td></tr></tbody></table><h5 id="methods_getref_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-firebase">Firebase</a></td><td><div class="app-refservice-getref-page"><p>a <code>Firebase</code> reference for the specified
+collection.</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>

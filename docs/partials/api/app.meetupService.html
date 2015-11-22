@@ -1,0 +1,58 @@
+<a href="https://github.com/fediltest0/meetup/edit/master/src/app/js/services/meetup-service.js" class="improve-docs"><i class="icon-edit"> </i>Improve this doc</a><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/services/meetup-service.js#L22" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">meetupService</code>
+<div><span class="hint">service in module <code ng:non-bindable="">app</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="app-meetupservice-page"><p>The <code>meetupService</code> provides abstraction on data source and allows
+to perform basic operations on <code>members</code>. It also substitutes default
+picture using <code>noPhotoUrl</code> constant and bio for members that don&#39;t have
+this information.</p>
+<p>Internally <code>meetupService</code> heavily relies on <a href="#/api/app.refService">app.refService</a> that
+provides low-level data access API.</p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$firebaseArray">$firebaseArray</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/refService">refService</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/noPhotoUrl">noPhotoUrl</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/services/meetup-service.js#L85" class="view-source icon-eye-open"> </a><h3 id="methods_getmember">getMember(member)</h3>
+<div class="getmember"><div class="app-meetupservice-getmember-page"><p>Returns member object by it&#39;s ID</p>
+<pre><code class="lang-js">meetupService.getMember(&#39;1&#39;);
+</code></pre>
+</div><h5 id="methods_getmember_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>member</td><td><a href="" class="label type-hint type-hint-string">String</a><a href="" class="label type-hint type-hint-number">Number</a></td><td><div class="app-meetupservice-getmember-page"><p>ID. String value will be parsed
+as integer before use.</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/services/meetup-service.js#L66" class="view-source icon-eye-open"> </a><h3 id="methods_getmembers">getMembers()</h3>
+<div class="getmembers"><div class="app-meetupservice-getmembers-page"><p>Returns an object containing list of members. First time method is
+called, the list of members will be empty and will be populated
+asynchronously once data received from <a href="#/api/app.refService">refService</a>.</p>
+<pre><code class="lang-js">meetupService.getMembers();
+</code></pre>
+</div></div>
+</li>
+<li><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/services/meetup-service.js#L125" class="view-source icon-eye-open"> </a><h3 id="methods_updatemember">updateMember(member)</h3>
+<div class="updatemember"><div class="app-meetupservice-updatemember-page"><p>In is not necessary to pass all properties of a member, only those
+that have been changed. Only the presance of <code>$id</code> property in the
+object is mandatory, all the others are optional.</p>
+<p>Member object that is passed as parameter will be cloned and all
+properties starting from one of the following characters will be
+deleted: <code>.#$/[]</code>.</p>
+<pre><code class="lang-js">meetupService.updateMember({
+    $id: 1,
+    name: &#39;John Doe&#39;,
+    city: &#39;Tel Aviv&#39;,
+    notes: &#39;Some useful notes&#39;
+});
+</code></pre>
+</div><h5 id="methods_updatemember_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>member</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="app-meetupservice-updatemember-page"><p>object representing a meetup member</p>
+</div></td></tr></tbody></table></div>
+</li>
+</ul>
+</div>
+</div>

@@ -1,0 +1,38 @@
+<a href="https://github.com/fediltest0/meetup/edit/master/src/app/js/controllers/members-controller.js" class="improve-docs"><i class="icon-edit"> </i>Improve this doc</a><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/controllers/members-controller.js#L20" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">MembersController</code>
+<div><span class="hint">controller in module <code ng:non-bindable="">app</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="app-controller-page app-controller-memberscontroller-page"><p>The <code>MembersController</code> is a controller that is used to expose
+functionality required for members page. It provides methods to manage
+UI as well as watching for changes in member details and persisting
+changes using <a href="#/api/app.meetupService">meetupService</a>. Also
+<code>MembersController</code> is responsible for updating selected user details
+according to active route parameters.</p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$scope">$scope</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$routeParams">$routeParams</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$mdSidenav">$mdSidenav</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/meetupService">meetupService</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><a href="https://github.com/fediltest0/meetup/blob/963af3f/src/app/js/controllers/members-controller.js#L43" class="view-source icon-eye-open"> </a><h3 id="methods_togglesidenav">toggleSidenav(menuId)</h3>
+<div class="togglesidenav"><div class="app-controller-page app-controller-togglesidenav-togglesidenav-page"><p>Toggles navigation sidebar using <code>$mdSidenav</code> service.</p>
+<pre><code class="lang-html">&lt;md-sidenav md-component-id=&quot;menu&quot;&gt;Sidebar&lt;/md-sidenav&gt;
+
+&lt;div ng-controller=&quot;MembersController as vm&quot;&gt;
+  &lt;button ng-click=&quot;vm.toggleSidenav(&#39;menu&#39;)&quot;&gt;Toggle sidebar&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+</div><h5 id="methods_togglesidenav_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>menuId</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="app-controller-page app-controller-togglesidenav-togglesidenav-page"><p>ID of a sidebar to be toggled</p>
+</div></td></tr></tbody></table></div>
+</li>
+</ul>
+</div>
+</div>
