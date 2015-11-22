@@ -1,19 +1,21 @@
 describe('Protractor Demo App', function() {
+    var ptor;
 
+    beforeEach(function() {
+        ptor = protractor.getInstance();
+    });
+    
     it('should have a title', function() {
         browser.get('http://localhost:8282/app/index.html');
         expect(browser.getTitle()).toEqual('Front-End.IL');
     });
 
-    it('should add one and two', function() {
-        browser.get('http://juliemr.github.io/protractor-demo/');
-        element(by.model('first')).sendKeys(1);
-        element(by.model('second')).sendKeys(2);
-
-        element(by.id('gobutton')).click();
-
-        expect(element(by.binding('latest')).getText()).
-        toEqual('3');
+    it('should open login page by default', function() {
+        var url;
+        browser.get('http://localhost:8282/app/index.html');
+        ptor.waitForAngular();
+        url = ptor.getCurrentUrl();
+        expect(url.indexOf('#/login') > 0).toBeTruthy();
     });
 
 });
