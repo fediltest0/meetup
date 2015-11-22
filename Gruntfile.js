@@ -13,6 +13,7 @@ module.exports = function(grunt) {
     grunt.registerTask('test:unit', ['clean:test', 'karma', 'coveralls']);
     grunt.registerTask('test:e2e', ['http-server', 'protractor']);
     grunt.registerTask('docs', ['ngdocs']);
+    grunt.registerTask('deploy', ['gh-pages']);
     
     // Default task.
     tasks = [
@@ -24,6 +25,7 @@ module.exports = function(grunt) {
     ];
     if (process.env.TRAVIS) {
         tasks.push('test:e2e');
+        tasks.push('deploy');
     }
     grunt.registerTask('default', tasks);
 
