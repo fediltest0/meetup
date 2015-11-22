@@ -3,10 +3,9 @@ module.exports = function(grunt) {
     return {
         dist: {
             options: {
-                repo: grunt.config.process('<%= pkg.repo.url %>').replace(
-                    /.*:\/\//,
-                    'https://' + process.env.GH_TOKEN + '@'
-                ),
+                repo: 'https://' +
+                    process.env.GH_TOKEN +
+                    '@github.com/fediltest0/meetup.git',
                 base: 'dist',
                 message: 'Generate gh-pages with Grunt task gh-pages:dist',
                 user: {
