@@ -7,8 +7,7 @@ describe('Front-End.IL Meetup Demo App', function() {
 
     it('should open login page by default', function() {
         browser.get('http://localhost:8282/app/index.html');
-        expect(browser.getLocationAbsUrl()).
-            toBe('http://localhost:8282/app/index.html#/login');
+        expect(browser.getLocationAbsUrl()).toBe('/login');
     });
 
 });
