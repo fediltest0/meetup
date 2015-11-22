@@ -6,10 +6,9 @@ describe('Front-End.IL Meetup Demo App', function() {
     });
 
     it('should open login page by default', function() {
-        var url;
         browser.get('http://localhost:8282/app/index.html');
-        url = browser.getLocationAbsUrl();
-        expect(url.indexOf('#/login') > 0).toBeTruthy();
+        expect(browser.getLocationAbsUrl()).
+            toBe('http://localhost:8282/app/index.html#/login');
     });
 
 });
